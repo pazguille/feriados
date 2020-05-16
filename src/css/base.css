@@ -1,0 +1,110 @@
+﻿/**
+ * Global
+ */
+body {
+  font: 100%/1.4em 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #343434;
+  background-color: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+
+ul,
+ol {
+  list-style-position: inside;
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+hr {
+  border: none;
+  border-bottom: 1px solid #ccc;
+}
+
+/**
+ * Helpers
+ */
+.user-no-select {
+  -o-user-select: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hide {
+  display: none !important;
+}
+
+.hidden {
+  visibility: hidden !important;
+}
+
+.invisible {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+/*
+ * Anchors
+ */
+a img {
+  border: none;
+}
+
+/*
+ * Paragraphs & Lists
+ */
+p, ol, ul {
+  line-height: 1.5em;
+  font-weight: 200;
+}
+
+/*
+ * Headings
+ */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  margin: 0.313em 0;
+  line-height: 1em;
+}
+
+h1 {
+  font-size: 3.5em; /* 48px */
+}
+
+h2 {
+  font-size: 3em; /* 35px */
+}
+
+h3 {
+  font-size: 1.750em; /* 28px */
+}
+
+h4 {
+  font-size: 1.313em; /* 21px */
+}
+
+h5 {
+  font-size: 1.125em; /* 18px */
+}
+
+h6 {
+  font-size: 1em; /* 16px */
+}
