@@ -76,25 +76,34 @@ header {
 }
 
 nav {
-  display: inline-block;
-  width: 75%;
+  height: 105px;
   text-align: center;
+  position: sticky;
+  background: var(--bg-color);
+  border-top: 1px solid var(--border-color);
 }
 
 .calendar-title {
   display: inline-block;
-  width: 124px;
+  width: 80%;
   text-transform: capitalize;
+  text-align: center;
 }
 
 .btn {
   touch-action:none;
   border: none;
   background: none;
-  margin: 0 4px;
-  width: 55px;
-  height: 55px;
+  margin: 10px 0;
+  padding: 0 30px;
+  width: 48%;
+  height: 50px;
   color: var(--txt-color);
+  font-size: 30px;
+}
+
+#next {
+  border-left: 1px solid var(--border-color);
 }
 
 .btn:active,
@@ -110,6 +119,8 @@ nav {
   position: relative;
   left: 18%;
   padding: 20px 10px;
+
+  min-height: 73vh;
 }
 
 .day {
@@ -177,16 +188,19 @@ nav {
 }
 
 .share-buttons {
-  display: block;
-  overflow: hidden;
   margin: 0 0 10px;
-  border-top: 1px solid var(--border-color);
   font-size: .9em;
+
+
+  display: block;
+  font-size: 1em;
+  border-top: 1px solid var(--border-color);
+  padding-top: 15px;
 }
 
 .share-buttons p {
-  margin: 10px 0;
   text-align: center;
+  margin: 0;
 }
 
 .heart {
