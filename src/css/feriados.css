@@ -29,7 +29,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --txt-color: #fff; 
+    --txt-color: #fff;
     --bg-color: #2d2d2d;
     --border-color: #4b5454;
   }
@@ -43,7 +43,8 @@ body {
   color: var(--txt-color);
   background-color: var(--bg-color);
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
 }
 
 a,
@@ -85,13 +86,14 @@ nav {
 
 .calendar-title {
   display: inline-block;
-  width: 80%;
+  width: 75%;
   text-transform: capitalize;
   text-align: center;
 }
 
 .btn {
   touch-action:none;
+  user-select: none;
   border: none;
   background: none;
   margin: 10px 0;
@@ -115,12 +117,10 @@ nav {
   list-style: none;
   border-left: 1px solid var(--border-color);
   width: 76%;
-  min-height: 77vh;
+  min-height: 73vh;
   position: relative;
   left: 18%;
   padding: 20px 10px;
-
-  min-height: 73vh;
 }
 
 .day {
@@ -190,12 +190,9 @@ nav {
 .share-buttons {
   margin: 0 0 10px;
   font-size: .9em;
-
-
-  display: block;
   font-size: 1em;
   border-top: 1px solid var(--border-color);
-  padding-top: 15px;
+  padding-top: 5px;
 }
 
 .share-buttons p {
