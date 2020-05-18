@@ -103,7 +103,7 @@ header {
   width: 55px;
   border: none;
   background: transparent;
-}
+  filter: grayscale(1);
 }
 
 nav {
