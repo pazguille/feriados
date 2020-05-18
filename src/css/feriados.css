@@ -38,6 +38,22 @@
   }
 }
 
+[data-bright-env="light-mode"] {
+  --txt-color: #343434 !important;
+  --txt-day-color: #ffffff !important;
+  --bg-color: #fdfdfd !important;
+  --border-color: #d6d6d6 !important;
+  --bg-highlight-color: #bc0506 !important;
+}
+
+[data-bright-env="dark-mode"] {
+  --txt-color: #fff !important;
+  --txt-day-color: #292947 !important;
+  --bg-color: #2d2d2d !important;
+  --border-color: #4b5454 !important;
+  --bg-highlight-color: #14d298 !important;
+}
+
 /**
  * Global
  */
@@ -77,6 +93,17 @@ header {
   width: 16%;
   text-align: right;
   margin-right: 2%;
+}
+
+.bright-env {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 55px;
+  width: 55px;
+  border: none;
+  background: transparent;
+}
 }
 
 nav {
