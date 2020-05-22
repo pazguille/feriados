@@ -6,8 +6,8 @@
 
 # Screenshots
 
-<img src="https://cldup.com/KszcmBnW0T-600x600.jpeg" alt="Feriados Web App versión light-mode">
-<img src="https://cldup.com/pZeR7ZGv_l-600x600.jpeg" alt="Feriados Web App versión dark-mode">
+<img src="https://cldup.com/rdJ8xamKDe-600x600.jpeg" alt="Feriados Web App versión light-mode">
+<img src="https://cldup.com/Ivoge8XhvB-600x600.jpeg" alt="Feriados Web App versión dark-mode">
 
 ## With ❤ by
 
