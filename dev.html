@@ -183,9 +183,9 @@
         const movePassiveListener = touch.start === 'touchstart' ? { passive: false, capture: false } : false;
         let startOffsetX = 0;
         let startOffsetY = 0;
+        let currentOffsetX = 0;
         let scrolling = false;
         const tolerance = 70;
-        let currentOffsetX = 0;
 
         function resetTouchFn(eve) {
           if (typeof eve.touches === 'undefined') {
@@ -198,7 +198,7 @@
 
         function onTouchEndFn() {
           if (!scrolling && currentOffsetX !== 0) {
-            const direction = startOffsetX > currentOffsetX ? 'next' : 'prev';
+            const direction = currentOffsetX < 0? 'next' : 'prev';
             moveMonthTo(direction);
             return;
           }
@@ -212,6 +212,7 @@
           }
 
           var dif_x = eve.touches[0].pageX - startOffsetX;
+
           var dif_y = eve.touches[0].pageY - startOffsetY;
           var touchAngle = (Math.atan2(Math.abs(dif_y), Math.abs(dif_x)) * 180) / Math.PI;
           var isScrolling = touchAngle > 45;
