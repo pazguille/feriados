@@ -1,6 +1,6 @@
 # Feriados Web App
 
-> 🗓 Web App para ver los feriados nacionales en Argentina para ponerte felíz que no vas a trabajar.
+> 🗓 Web App para ver los feriados nacionales en Argentina.
 
 - Web App: https://pazguille.github.io/feriados
 

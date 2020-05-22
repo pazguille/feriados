@@ -2,7 +2,6 @@
 <html lang="es">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="color-scheme" content="light dark">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
@@ -17,6 +16,7 @@
     <link rel="apple-touch-icon-precomposed" href="src/assets/favicon-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="120x120" href="src/assets/favicon-120.png">
     <link rel="preload" href="https://nolaborables.com.ar/api/v2/feriados/2020?formato=mensual&incluir=opcional" as="fetch" crossorigin="anonymous" />
+    <link rel="preload" href="https://nolaborables.com.ar/api/v2/festivos/2020" as="fetch" crossorigin="anonymous" />
     <link rel="shortcut icon" href="src/assets/favicon.svg">
     <link rel="stylesheet" href="src/css/normalize.css">
     <link rel="stylesheet" href="src/css/base.css">
@@ -34,8 +34,8 @@
   <body>
     <header>
       <h1 class="logo">Feriados</h1>
-      <time class="calendar-title">Mayo 2020</time>
-      <button class="bright-env">
+      <time class="calendar-title">Cargando...</time>
+      <button type="button" class="bright-env">
         <span id="light-mode">🔅</span>
         <span id="dark-mode" hidden>🌙</span>
       </button>
@@ -45,11 +45,11 @@
       <ol class="timeline"></ol>
     </main>
     <nav>
-      <button id="prev" class="btn">&larr;</button>
-      <button id="next" class="btn">&rarr;</button>
+      <button type="button" id="prev" class="btn">&larr;</button>
+      <button type="button" id="next" class="btn">&rarr;</button>
 
       <footer class="share-buttons">
-        <p>with <i class="heart">&#10084;</i> by <a href="https://twitter.com/pazguille" target="_blank" rel="noopener">pazguille</a></p>
+        <p>with <i class="heart">&#10084;</i> by <a href="https://twitter.com/pazguille" target="_blank" rel="noopener noreferrer">pazguille</a></p>
       </footer>
     </nav>
     <script>
@@ -130,14 +130,16 @@
             let feriado = monthHolidays[day];
             feriado = !Array.isArray(feriado) ? feriado = [feriado] : feriado;
 
+            const holidayDate = new Date(newDate.getFullYear(), newDate.getMonth(), day);
+            const datetime = holidayDate.toISOString().replace(/T.+/, '');
             const weekday = new Intl.DateTimeFormat('es-AR', {
               timeZone: 'America/Argentina/Buenos_Aires', weekday: 'short'
-            }).format(new Date(newDate.getFullYear(), newDate.getMonth(), day));
+            }).format(holidayDate);
 
             const nextHolidayClass = !nextMarked && (parseInt(day, 10) > today.getDate() && newDate.getMonth() === today.getMonth() && newDate.getFullYear() === today.getFullYear()) ? (nextMarked = true && 'next') : '';
 
             return `<li class="day ${nextHolidayClass}">
-                      <time><strong>${leftFillNum(day)}</strong> ${weekday.toUpperCase()}</time>
+                      <time datetime="${datetime}"><strong>${leftFillNum(day)}</strong> ${weekday.toUpperCase()}</time>
                       ${feriado.map(item => `<p>${item.motivo}<br/>${item.tipo.toUpperCase()}</p>`).join('<br>')}
                     </li>`;
           }).join('');

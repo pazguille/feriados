@@ -64,6 +64,10 @@ hr {
 /*
  * Anchors
  */
+a {
+  text-underline-position: under;
+}
+
 a img {
   border: none;
 }
