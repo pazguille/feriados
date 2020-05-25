@@ -136,7 +136,8 @@
               timeZone: 'America/Argentina/Buenos_Aires', weekday: 'short'
             }).format(holidayDate);
 
-            const nextHolidayClass = !nextMarked && (parseInt(day, 10) > today.getDate() && newDate.getMonth() === today.getMonth() && newDate.getFullYear() === today.getFullYear()) ? (nextMarked = true && 'next') : '';
+            const nextHolidayClass = !nextMarked && (parseInt(day, 10) >= today.getDate() && newDate.getMonth() === today.getMonth() && newDate.getFullYear() === today.getFullYear()) ? (nextMarked = true && 'next') : '';
+            // const todayHolidayClass = (parseInt(day, 10) === today.getDate() && newDate.getMonth() === today.getMonth() && newDate.getFullYear() === today.getFullYear()) ? 'today' : '';
 
             return `<li class="day ${nextHolidayClass}">
                       <time datetime="${datetime}"><strong>${leftFillNum(day)}</strong> ${weekday.toUpperCase()}</time>
