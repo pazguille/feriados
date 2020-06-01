@@ -18,8 +18,11 @@ $$('[data-js="layout-title"]').addEventListener('click', () => toggleLayout());
 $$('[data-js="layout-toggle"]').addEventListener('click', () => toggleLayout());
 
 $$('[data-js="year-selection"]').addEventListener('click', (eve) => {
-  const selected = eve.target.firstElementChild.getAttribute('datetime');
-  const date = new Date(`${selected}T00:00:00`);
-  moveMonthTo(date);
-  toggleLayout();
+  const target = eve.target.firstElementChild;
+  if (target.nodeName === 'TIME') {
+    const selected = target.getAttribute('datetime').replace(/-/g, '/');
+    const date = new Date(selected);
+    moveMonthTo(date);
+    toggleLayout();
+  }
 });
