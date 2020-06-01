@@ -1,13 +1,15 @@
 <!doctype html>
-<html lang="es" data-view="timeline">
+<html lang="es">
   <head>
     <meta charset="utf-8">
     <meta name="HandheldFriendly" content="True">
     <meta name="color-scheme" content="light dark">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
+
     <meta name="apple-touch-fullscreen" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Feriados">
+
     <link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)" href="src/assets/apple-launch-1242x2208.png">
     <link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3)" href="src/assets/apple-launch-1242x2208.png">
     <link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" href="src/assets/apple-launch-1242x2208.png">
@@ -15,16 +17,18 @@
     <link rel="apple-touch-icon" href="src/assets/favicon-120.png">
     <link rel="apple-touch-icon-precomposed" href="src/assets/favicon-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="120x120" href="src/assets/favicon-120.png">
+
     <link rel="preload" href="https://nolaborables.com.ar/api/v2/feriados/2020?formato=mensual&incluir=opcional" as="fetch" crossorigin="anonymous" />
     <!-- <link rel="preload" href="https://nolaborables.com.ar/api/v2/festivos/2020" as="fetch" crossorigin="anonymous" /> -->
+
     <link rel="shortcut icon" href="src/assets/favicon.svg">
 
-    <link rel="stylesheet" href="src/css/normalize.css">
     <link rel="stylesheet" href="src/css/base.css">
     <link rel="stylesheet" href="src/css/feriados.css">
 
     <link rel="modulepreload" href="./src/js/html.js">
     <link rel="modulepreload" href="./src/js/bright.js">
+    <link rel="modulepreload" href="./src/js/dates.js">
     <link rel="modulepreload" href="./src/js/calendar.js">
 
     <title>Feriados Nacionales de Argentina</title>
@@ -51,6 +55,7 @@
         <p><i class="heart">&#10084;</i> by <a href="https://twitter.com/pazguille" target="_blank" rel="noopener noreferrer">pazguille</a></p>
       </footer>
     </div>
+
     <div id="panel" class="panel slideout-panel slideout-panel-right slideout-move">
       <header>
         <h1 class="logo">
@@ -64,14 +69,17 @@
         <ol class="year" data-hidden data-js="year-selection"></ol>
       </main>
     </div>
+
     <script type="module">
       const PATH = './src/js';
       import(`${PATH}/bright.js`);
       import { fetchData } from './src/js/calendar.js';
-      fetchData().then(()=> {
-        import(`${PATH}/swipe-gesture.js`);
-        import(`${PATH}/change-layout.js`);
-        import(`${PATH}/slideout.js`);
+      fetchData().then(() => {
+        requestIdleCallback(() => {
+          import(`${PATH}/swipe-gesture.js`);
+          import(`${PATH}/change-layout.js`);
+          import(`${PATH}/slideout.js`);
+        });
       });
     </script>
   </body>

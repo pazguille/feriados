@@ -1,22 +1,41 @@
 import { $$, html, render } from './html.js';
+import {
+  today, moveDate, isSameYear, getMonthLongName, leftFillNum, getDatetimeFormat,
+  getWeekdayShortName, isNextDay, isCurrentMonth, getNewYear,
+} from './dates.js';
+
+let currentDate = today;
 
 const holidaysData = {};
-const today = new Date();
-let currentDate = new Date();
-
 const $timeline = $$('.timeline');
+
+const noDataYearTemplate = (year) => `<li class="nodata">No tengo información para el ${year} :(</li>`;
+const noHolidaysTemplate = () => '<li class="nodata">No hay feriados este mes :(</li>';
+
+const monthTemplate = ({ nextHoliday, datetime, day, weekday, feriado }) => (
+  `<li class="day ${nextHoliday}">
+    <time datetime="${datetime}"><strong>${day}</strong> ${weekday}</time>
+    ${feriado.map(item => `<p>${item.motivo}<br/>${item.tipo.toUpperCase()}</p>`).join('<br>')}
+  </li>`
+);
+
+const yearTemplate = ({ currentMonth, datetime, monthName, month }) => (
+  `<li class="month ${currentMonth}">
+    <time datetime="${datetime}">${monthName}</time>
+    ${Object.keys(month).map(item => '<span></span>').join('')}
+  </li>`
+);
 
 export function moveMonthTo(moveTo) {
   let newDate = moveTo;
 
   if (typeof moveTo === 'string') {
-    const moveToNum = moveTo === 'next' ? 1 : -1;
-    newDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + moveToNum, 1);
+    newDate = moveDate(currentDate, moveTo);
   }
 
   if (newDate.getFullYear() in holidaysData) {
     renderMonth(newDate);
-    if (newDate.getFullYear() !== currentDate.getFullYear()) {
+    if (!isSameYear(newDate, currentDate)) {
       renderYear(newDate);
     }
   } else {
@@ -50,36 +69,22 @@ function bootCalendar(data) {
 
 function renderEmptyCalendar(mode, newDate) {
   const toggletMethod = mode === 'async' ? 'remove' : 'add';
-  const currentFormated = new Intl.DateTimeFormat('es-AR', {
-    timeZone: 'America/Argentina/Buenos_Aires',
-    month: 'long',
-  }).format(newDate);
+  $$('.calendar-title').firstChild.data = `${getMonthLongName(newDate)} ${newDate.getFullYear()}`;
   $$('.loading').classList[toggletMethod]('hide');
-  $$('.calendar-title').firstChild.data = `${currentFormated} ${newDate.getFullYear()}`;
   while ($timeline.lastChild) { $timeline.removeChild($timeline.lastChild); }
-}
-
-function leftFillNum(day) {
-  const n = parseInt(day);
-  if (n < 10) {
-    return day.padStart(2, '0');
-  }
-  return day;
 }
 
 function renderMonth(newDate) {
   renderEmptyCalendar('sync', newDate);
 
   if (holidaysData[newDate.getFullYear()] === null) {
-    return $timeline.insertAdjacentHTML('beforeend',
-    `<li class="nodata">No tengo información para el ${newDate.getFullYear()} :(</li>`);
+    return $timeline.insertAdjacentHTML('beforeend', noDataYearTemplate(newDate.getFullYear()));
   }
 
   const monthHolidays = holidaysData[[newDate.getFullYear()]][newDate.getMonth()];
 
   if (Object.keys(monthHolidays).length === 0) {
-    return $timeline.insertAdjacentHTML('beforeend',
-    '<li class="nodata">No hay feriados este mes :(</li>');
+    return $timeline.insertAdjacentHTML('beforeend', noHolidaysTemplate());
   }
 
   let nextMarked = false;
@@ -87,19 +92,14 @@ function renderMonth(newDate) {
   const template = Object.keys(monthHolidays).map(function(day) {
     let feriado = monthHolidays[day];
     feriado = !Array.isArray(feriado) ? feriado = [feriado] : feriado;
-
     const holidayDate = new Date(newDate.getFullYear(), newDate.getMonth(), day);
-    const datetime = holidayDate.toISOString().replace(/T.+/, '');
-    const weekday = new Intl.DateTimeFormat('es-AR', {
-      timeZone: 'America/Argentina/Buenos_Aires', weekday: 'short'
-    }).format(holidayDate);
-
-    const nextHolidayClass = !nextMarked && (parseInt(day, 10) >= today.getDate() && newDate.getMonth() === today.getMonth() && newDate.getFullYear() === today.getFullYear()) ? (nextMarked = true && 'next') : '';
-
-    return `<li class="day ${nextHolidayClass}">
-              <time datetime="${datetime}"><strong>${leftFillNum(day)}</strong> ${weekday.toUpperCase()}</time>
-              ${feriado.map(item => `<p>${item.motivo}<br/>${item.tipo.toUpperCase()}</p>`).join('<br>')}
-            </li>`;
+    return monthTemplate({
+      nextHoliday: !nextMarked && isNextDay(holidayDate) ? (nextMarked = true && 'next') : '',
+      datetime: getDatetimeFormat(holidayDate),
+      day: leftFillNum(day),
+      weekday: getWeekdayShortName(holidayDate).toUpperCase(),
+      feriado,
+    });
   }).join('');
 
   $timeline.insertAdjacentHTML('beforeend', template);
@@ -110,24 +110,19 @@ function renderYear(newDate) {
   while ($year.lastChild) { $year.removeChild($year.lastChild); }
   const yearHolidays = holidaysData[[newDate.getFullYear()]];
   const template = yearHolidays.map(function(month, index) {
-    const yearDate = new Date(newDate.getFullYear(), index, 1);
-    const datetime = yearDate.toISOString().replace(/T.+/, '');
-    const monthName = new Intl.DateTimeFormat('es-AR', {
-      timeZone: 'America/Argentina/Buenos_Aires', month: 'long'
-    }).format(yearDate);
-
-    const todayHolidayClass = yearDate.getMonth() === today.getMonth() && yearDate.getFullYear() === today.getFullYear() ? 'current' : '';
-
-    // return html`<li onClick="${() => console.log(monthName)}" class="month ${todayHolidayClass}">
+    const yearDate = getNewYear(newDate, index);
+    return yearTemplate({
+      monthName: getMonthLongName(yearDate),
+      currentMonth: isCurrentMonth(yearDate) ? 'current' : '',
+      datetime: getDatetimeFormat(yearDate),
+      month,
+    });
+    // return html`<li onClick="${() => console.log(monthName)}" class="month ${currentMonth}">
     //           <time datetime="${datetime}">${monthName}</time>
     //           <div ref="${monthName}">
     //             ${Object.keys(month).map(item => '<span></span>').join('')}
     //           </div>
     //         </li>`;
-    return `<li ref=${monthName} class="month ${todayHolidayClass}">
-              <time datetime="${datetime}">${monthName}</time>
-              ${Object.keys(month).map(item => '<span></span>').join('')}
-            </li>`;
   // });
   }).join('');
   $year.insertAdjacentHTML('beforeend', template);
@@ -141,5 +136,7 @@ function renderYear(newDate) {
 
 function renderCalendar(date) {
   renderMonth(date);
-  renderYear(date);
+  requestIdleCallback(() => {
+    renderYear(date);
+  });
 }

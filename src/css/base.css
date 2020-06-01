@@ -1,11 +1,19 @@
 ﻿/**
  * Global
  */
-body {
+
+ html {
+  font-family: sans-serif; /* 1 */
+  -ms-text-size-adjust: 100%; /* 2 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+ body {
   font: 100%/1.4em 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #343434;
   background-color: #fff;
   -webkit-font-smoothing: antialiased;
+  margin: 0;
 }
 
 ul,
@@ -29,64 +37,30 @@ button * {
   pointer-events: none;
 }
 
-/**
- * Helpers
- */
-.user-no-select {
-  -o-user-select: none;
-  -ms-user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
+button {
+  color: inherit;
+  font: inherit;
+  margin: 0;
 }
 
-.ellipsis {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.hide {
-  display: none !important;
-}
-
-.hidden {
-  visibility: hidden !important;
-}
-
-.invisible {
-  border: 0;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
-}
-
-/*
- * Anchors
- */
 a {
   text-underline-position: under;
+}
+
+a:active,
+a:hover {
+  outline: 0;
 }
 
 a img {
   border: none;
 }
 
-/*
- * Paragraphs & Lists
- */
 p, ol, ul {
   line-height: 1.5em;
   font-weight: 200;
 }
 
-/*
- * Headings
- */
 h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
   margin: 0.313em 0;
@@ -95,6 +69,7 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
   font-size: 3.5em; /* 48px */
+  margin: 0.67em 0;
 }
 
 h2 {
@@ -115,4 +90,16 @@ h5 {
 
 h6 {
   font-size: 1em; /* 16px */
+}
+
+.hide {
+  display: none !important;
+}
+
+.hidden {
+  visibility: hidden !important;
+}
+
+[hidden] {
+  display: none !important;
 }

@@ -1,28 +1,35 @@
-import { $$, docEl } from './html.js';
+import { $$ } from './html.js';
+import { stringToDate } from './dates.js';
 import { moveMonthTo } from './calendar.js';
 
+let $yearSelection = null;
+let activeLayoutView = 'timeline';
+
 function toggleLayout() {
-  const currentView = docEl.getAttribute('data-view');
-  const switchToView = currentView === 'year' ? 'timeline' : 'year';
-  docEl.setAttribute('data-view', switchToView);
+  const currentView = activeLayoutView;
+  activeLayoutView = currentView === 'year' ? 'timeline' : 'year';
+
+  if (!$yearSelection) {
+    $yearSelection = $$('[data-js="year-selection"]');
+  }
 
   currentView === 'year' ?
-    $$('[data-js="year-selection"]').setAttribute('data-hidden', 'true') :
-    $$('[data-js="year-selection"]').removeAttribute('data-hidden');
+    $yearSelection.setAttribute('data-hidden', 'true') :
+    $yearSelection.removeAttribute('data-hidden');
 
-  $$(`#${switchToView}-view`).setAttribute('hidden', 'hidden');
-  $$(`#${currentView}-view`).removeAttribute('hidden');
+  requestIdleCallback(() => {
+    $$(`#${activeLayoutView}-view`).setAttribute('hidden', 'hidden');
+    $$(`#${currentView}-view`).removeAttribute('hidden');
+  })
 }
 
-$$('[data-js="layout-title"]').addEventListener('click', () => toggleLayout());
-$$('[data-js="layout-toggle"]').addEventListener('click', () => toggleLayout());
-
+$$('[data-js="layout-title"]').addEventListener('click', toggleLayout);
+$$('[data-js="layout-toggle"]').addEventListener('click', toggleLayout);
 $$('[data-js="year-selection"]').addEventListener('click', (eve) => {
   const target = eve.target.firstElementChild;
   if (target.nodeName === 'TIME') {
-    const selected = target.getAttribute('datetime').replace(/-/g, '/');
-    const date = new Date(selected);
-    moveMonthTo(date);
+    const selected = stringToDate(target.getAttribute('datetime'));
+    moveMonthTo(selected);
     toggleLayout();
   }
 });
