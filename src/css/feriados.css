@@ -259,6 +259,7 @@ nav {
   position: relative;
   left: 18%;
   padding: 20px 10px;
+  background-color: var(--bg-color);
 }
 
 .day {
