@@ -35,14 +35,3 @@ $$('[data-js="year-selection"]').addEventListener('click', (eve) => {
     });
   }
 });
-// const $infoView = $$('[data-js="info"]');
-// $$('[data-js="holiday-selection"]').addEventListener('click', (eve) => {
-//   eve.preventDefault();
-//   const link = eve.target.parentNode;
-//   if (link.nodeName === 'A') {
-//     $infoView.src = link.href;
-//     $infoView.onload = () => $infoView.removeAttribute('data-hidden');
-
-//     // history.pushState(null, null, "/info");
-//   }
-// });
