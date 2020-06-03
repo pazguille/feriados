@@ -396,6 +396,14 @@ nav {
   pointer-events: none;
 }
 
+button:active,
+.calendar-title:active,
+.day p:active,
+.month:active {
+  opacity: 0.9;
+  transform: scale(0.98);
+}
+
 .month time {
   font-size: 24px;
   font-weight: 400;
