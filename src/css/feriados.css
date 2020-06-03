@@ -32,8 +32,8 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --txt-color: #fff;
-    --bg-color: #121212;
-    --bg-box-color: #1c1c1c;
+    --bg-color: #18191A;
+    --bg-box-color: #242526;
     --border-color: #4b5454;
     --bg-highlight-color: #03dac5;
     --bg-box-highlight-color: rgba(3, 218, 197, 0.12);
@@ -130,6 +130,7 @@ body {
 a,
 a:visited {
   color: var(--txt-color);
+  text-decoration: none;
 }
 
 main {
@@ -252,6 +253,13 @@ nav {
   outline: none;
 }
 
+.timeline-mask {
+  position: relative;
+  height: calc(100vh - 55px);
+  overflow: auto;
+  scroll-behavior: smooth;
+}
+
 .timeline {
   list-style: none;
   border-left: 1px solid var(--border-color);
@@ -274,7 +282,7 @@ nav {
   width: 9px;
   height: 9px;
   position: absolute;
-  top: 5px;
+  top: 20px;
   left: -15px;
   border-radius: 100%;
   background: var(--bg-highlight-color);
@@ -303,6 +311,14 @@ nav {
   font-weight: 400;
   color: var(--txt-color);
   background-color: var(--bg-box-color);
+  border-radius: 6px;
+  font-size: 22px;
+  line-height: 30px;
+}
+
+.day p span {
+  font-size: 16px;
+  text-transform: capitalize;
 }
 
 .next {
@@ -357,7 +373,8 @@ nav {
 
 .year {
   list-style: none;
-  margin: 0 8px 12px;
+  margin-bottom: 12px;
+  padding: 0 8px;
   overflow: hidden;
   background-color: var(--bg-color);
   height: 100vh;
@@ -369,7 +386,7 @@ nav {
   margin: 8px 2%;
   width: 46%;
   height: 85px;
-  border-radius: 4px;
+  border-radius: 6px;
   box-sizing: border-box;
   float: left;
   text-transform: capitalize;
@@ -418,20 +435,39 @@ nav {
 main {
   position: relative;
   overflow: hidden;
-}
-
-.year[data-hidden] {
-  transform: translateY(200vh) !important
+  height: calc(100vh - 55px);
 }
 
 [data-view="year"] {
   overflow: hidden;
 }
 
-.year{
+.year {
   position: absolute;
   top: 0;
-  transition: transform 300ms cubic-bezier(0.4, 0, 1, 1);
+  transition: transform 500ms linear;
   transform: translateY(0);
   background-color: var(--bg-color);
+  will-change: transform;
 }
+
+.year[data-hidden] {
+  will-change: transform;
+  transform: translateY(100vh) !important
+}
+
+
+/* .info-view {
+  position: absolute;
+  top: 55px;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  transition: transform 500ms linear;
+  transform: translateX(0);
+}
+
+.info-view[data-hidden] {
+  will-change: transform;
+  transform: translateX(100%) !important;
+} */

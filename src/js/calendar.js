@@ -14,8 +14,14 @@ const noHolidaysTemplate = () => '<li class="nodata">No hay feriados este mes :(
 
 const monthTemplate = ({ nextHoliday, datetime, day, weekday, feriado }) => (
   `<li class="day ${nextHoliday}">
-    <time datetime="${datetime}"><strong>${day}</strong> ${weekday}</time>
-    ${feriado.map(item => `<p>${item.motivo}<br/>${item.tipo.toUpperCase()}</p>`).join('<br>')}
+    <time datetime="${datetime}">${weekday} <strong>${day}</strong></time>
+    ${
+      feriado.map(item => `
+        <a href="${item.info}" target="_blank" rel="noopener noreferrer" data-js="more-info">
+          <p>${item.motivo}<br/><span>${item.tipo}</span></p>
+        </a>`
+      ).join('<br>')
+    }
   </li>`
 );
 
@@ -36,7 +42,9 @@ export function moveMonthTo(moveTo) {
   if (newDate.getFullYear() in holidaysData) {
     renderMonth(newDate);
     if (!isSameYear(newDate, currentDate)) {
-      renderYear(newDate);
+      requestIdleCallback(() => {
+        renderYear(newDate);
+      });
     }
   } else {
     fetchNewYear(newDate);

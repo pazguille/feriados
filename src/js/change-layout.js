@@ -30,6 +30,19 @@ $$('[data-js="year-selection"]').addEventListener('click', (eve) => {
   if (target.nodeName === 'TIME') {
     const selected = stringToDate(target.getAttribute('datetime'));
     moveMonthTo(selected);
-    toggleLayout();
+    requestIdleCallback(() => {
+      toggleLayout();
+    });
   }
 });
+// const $infoView = $$('[data-js="info"]');
+// $$('[data-js="holiday-selection"]').addEventListener('click', (eve) => {
+//   eve.preventDefault();
+//   const link = eve.target.parentNode;
+//   if (link.nodeName === 'A') {
+//     $infoView.src = link.href;
+//     $infoView.onload = () => $infoView.removeAttribute('data-hidden');
+
+//     // history.pushState(null, null, "/info");
+//   }
+// });
