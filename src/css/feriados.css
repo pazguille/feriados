@@ -302,6 +302,11 @@ nav {
   font-size: 25px;
 }
 
+.day a {
+  display: block;
+  position: relative;
+}
+
 .day p {
   text-align: left;
   min-height: 60px;
@@ -319,6 +324,11 @@ nav {
 .day p span {
   font-size: 16px;
   text-transform: capitalize;
+
+  display: block;
+  border-top: 1px solid var(--border-color);
+  margin-top: 5px;
+  padding-top: 5px;
 }
 
 .next {
@@ -462,4 +472,27 @@ main {
 .year[data-hidden] {
   will-change: transform;
   transform: translateY(100vh) !important
+}
+
+.add-calendar-icon {
+  border: none;
+  background: transparent;
+  position: absolute;
+  right: 10px;
+  bottom: 0px;
+  margin: 0;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  line-height: 1em;
+}
+
+.add-calendar-icon:focus {
+  outline: none;
+}
+
+.add-calendar-icon svg {
+  width: 22px;
+  fill: var(--txt-color);
+  opacity: 0.7;
 }

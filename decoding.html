@@ -1,0 +1,32 @@
+<!-- <img src="https://pazguille.me/src/assets/me.png">
+
+<img decoding="sync" src="https://pazguille.me/src/assets/me.png?decoding=false">
+<img decoding="async" src="https://pazguille.me/src/assets/me.png?decoding=true"> -->
+<html>
+  <body>
+    <script>
+      function addDecImg(i) {
+        const img = new Image();
+        img.src = 'https://pazguille.me/src/assets/me.png?a='+i;
+        img.width = "200";
+        img.decode().then(() => {
+          setTimeout(() => document.body.appendChild(img), 0);
+        }).catch((e) => {
+            console.log(e);
+            throw new Error('Oops!');
+        });
+      };
+
+      function addImg(i) {
+        const img = new Image();
+        img.width = "200";
+        img.src = 'https://pazguille.me/src/assets/me.png?a='+i;
+        document.body.appendChild(img);
+      };
+
+      addImg(1);
+      addImg(2);
+      addDecImg(3);
+    </script>
+  </body>
+</html>

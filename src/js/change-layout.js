@@ -35,3 +35,11 @@ $$('[data-js="year-selection"]').addEventListener('click', (eve) => {
     });
   }
 });
+
+$$('[data-js="holiday-selection"]').addEventListener('click', (eve) => {
+  const target = eve.target;
+  if (target.nodeName === 'BUTTON') {
+    eve.preventDefault();
+    window.location.href = target.getAttribute('data-ical');
+  }
+});
