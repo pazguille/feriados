@@ -157,12 +157,23 @@ function renderCalendar(date) {
 function createEvent(datetime, description) {
   return 'data:text/calendar;charset=utf8,' + encodeURIComponent(`BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//hacksw/handcal//NONSGML v1.0//EN
+PRODID:-//ical.marudot.com//iCal Event Maker
+CALSCALE:GREGORIAN
+BEGIN:VTIMEZONE
+TZID:America/Argentina/Buenos_Aires
+TZURL:http://tzurl.org/zoneinfo-outlook/America/Argentina/Buenos_Aires
+X-LIC-LOCATION:America/Argentina/Buenos_Aires
+BEGIN:STANDARD
+TZOFFSETFROM:-0300
+TZOFFSETTO:-0300
+TZNAME:-03
+DTSTART:19700101T000000
+END:STANDARD
+END:VTIMEZONE
 BEGIN:VEVENT
-UID:uid1@example.com
 DTSTART;VALUE=DATE:${datetime}
 DTEND;VALUE=DATE:${datetime}
-SUMMARY:¡Feriado!😍
+SUMMARY:Feriadoooo!!!
 DESCRIPTION:${description}
 END:VEVENT
 END:VCALENDAR`
