@@ -157,7 +157,7 @@ function renderCalendar(date) {
 function createEvent(datetime, description) {
   return 'data:text/calendar;charset=utf8,' + encodeURIComponent(`BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//ical.marudot.com//iCal Event Maker
+PRODID:-//pazguille.github.com/feriados Local Maker
 CALSCALE:GREGORIAN
 BEGIN:VTIMEZONE
 TZID:America/Argentina/Buenos_Aires
@@ -173,7 +173,7 @@ END:VTIMEZONE
 BEGIN:VEVENT
 DTSTART;VALUE=DATE:${datetime}
 DTEND;VALUE=DATE:${datetime}
-SUMMARY:Feriadoooo!!!
+SUMMARY:😍Feriado!!!😍
 DESCRIPTION:${description}
 END:VEVENT
 END:VCALENDAR`
