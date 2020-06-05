@@ -3,6 +3,7 @@ import { stringToDate } from './dates.js';
 import { moveMonthTo } from './calendar.js';
 
 let $yearSelection = null;
+let $arrow = null;
 let activeLayoutView = 'timeline';
 
 function toggleLayout() {
@@ -13,9 +14,17 @@ function toggleLayout() {
     $yearSelection = $$('[data-js="year-selection"]');
   }
 
-  currentView === 'year' ?
-    $yearSelection.setAttribute('data-hidden', 'true') :
-    $yearSelection.removeAttribute('data-hidden');
+  if (!$arrow) {
+    $arrow = $$('[data-js="layout-icon"]');
+  }
+
+  if (currentView === 'year') {
+    $yearSelection.setAttribute('data-hidden', 'true')
+    $arrow.classList.remove('arrow-down');
+  } else {
+    $yearSelection.removeAttribute('data-hidden')
+    $arrow.classList.add('arrow-down');
+  }
 
   requestIdleCallback(() => {
     $$(`#${activeLayoutView}-view`).setAttribute('hidden', 'hidden');
@@ -24,6 +33,7 @@ function toggleLayout() {
 }
 
 $$('[data-js="layout-title"]').addEventListener('click', toggleLayout);
+$$('[data-js="layout-icon"]').addEventListener('click', toggleLayout);
 $$('[data-js="layout-toggle"]').addEventListener('click', toggleLayout);
 $$('[data-js="year-selection"]').addEventListener('click', (eve) => {
   const target = eve.target.firstElementChild;

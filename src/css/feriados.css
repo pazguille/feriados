@@ -255,7 +255,7 @@ nav {
 
 .timeline-mask {
   position: relative;
-  height: calc(100vh - 55px);
+  height: calc(100vh - 125px);
   overflow: auto;
   scroll-behavior: smooth;
 }
@@ -267,7 +267,6 @@ nav {
   position: relative;
   left: 18%;
   padding: 20px 10px;
-  background-color: var(--bg-color);
 }
 
 .day {
@@ -326,7 +325,6 @@ nav {
   text-transform: capitalize;
 
   display: block;
-  border-top: 1px solid var(--border-color);
   margin-top: 5px;
   padding-top: 5px;
 }
@@ -463,7 +461,7 @@ main {
 .year {
   position: absolute;
   top: 0;
-  transition: transform 500ms linear;
+  transition: transform 500ms ease;
   transform: translateY(0);
   background-color: var(--bg-color);
   will-change: transform;
@@ -495,4 +493,22 @@ main {
   width: 22px;
   fill: var(--txt-color);
   opacity: 0.7;
+}
+.arrow {
+  border: solid var(--border-color);
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(-135deg) skew(-5deg, -5deg);
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  z-index: 1;
+
+  border-width: 0 3px 3px 0;
+}
+
+.arrow-down {
+  border-width: 3px 0 0 3px;
 }
