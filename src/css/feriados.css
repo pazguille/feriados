@@ -255,7 +255,7 @@ nav {
 
 .timeline-mask {
   position: relative;
-  height: calc(100vh - 125px);
+  height: calc(100vh - 170px);
   overflow: auto;
   scroll-behavior: smooth;
 }
@@ -500,7 +500,7 @@ main {
   padding: 3px;
   transform: rotate(-135deg) skew(-5deg, -5deg);
   position: absolute;
-  bottom: 25px;
+  bottom: 50px;
   left: 50%;
   width: 10px;
   height: 10px;
