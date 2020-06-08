@@ -32,11 +32,7 @@ function toggleLayout() {
   })
 }
 
-$$('[data-js="layout-title"]').addEventListener('click', toggleLayout);
-$$('[data-js="layout-icon"]').addEventListener('click', toggleLayout);
-$$('[data-js="layout-toggle"]').addEventListener('click', toggleLayout);
-$$('[data-js="year-selection"]').addEventListener('click', (eve) => {
-  const target = eve.target.firstElementChild;
+function yearSelection(target) {
   if (target.nodeName === 'TIME') {
     const selected = stringToDate(target.getAttribute('datetime'));
     moveMonthTo(selected);
@@ -44,12 +40,21 @@ $$('[data-js="year-selection"]').addEventListener('click', (eve) => {
       toggleLayout();
     });
   }
-});
+}
 
-$$('[data-js="holiday-selection"]').addEventListener('click', (eve) => {
-  const target = eve.target;
+function holidaySelection(target) {
   if (target.nodeName === 'BUTTON') {
     eve.preventDefault();
     window.location.href = target.getAttribute('data-ical');
   }
+}
+
+$$('[data-js="layout-title"]').addEventListener('click', toggleLayout);
+$$('[data-js="layout-icon"]').addEventListener('click', toggleLayout);
+$$('[data-js="layout-toggle"]').addEventListener('click', toggleLayout);
+$$('[data-js="year-selection"]').addEventListener('click', (eve) => {
+  yearSelection(eve.target.firstElementChild);
+});
+$$('[data-js="holiday-selection"]').addEventListener('click', (eve) => {
+  holidaySelection(eve.target);
 });

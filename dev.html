@@ -68,24 +68,25 @@
         <div class="timeline-mask">
           <ol class="timeline" data-js="holiday-selection"></ol>
         </div>
-        <i class="arrow" data-js="layout-icon"></i>
+        <button type="button" class="toggle" data-js="layout-icon">
+          <i class="arrow" ></i>
+        </button>
         <ol class="year" data-hidden data-js="year-selection"></ol>
       </main>
     </div>
 
     <script type="module">
-      window.requestIdleCallback = window.requestIdleCallback ||
-        function (cb) {
-          var start = Date.now();
-          return setTimeout(function () {
-            cb({
-              didTimeout: false,
-              timeRemaining: function () {
-                return Math.max(0, 50 - (Date.now() - start));
-              }
-            });
-          }, 1);
-        };
+      window.requestIdleCallback = window.requestIdleCallback || function (cb) {
+        var start = Date.now();
+        return setTimeout(function () {
+          cb({
+            didTimeout: false,
+            timeRemaining: function () {
+              return Math.max(0, 50 - (Date.now() - start));
+            }
+          });
+        }, 1);
+      };
       const PATH = './src/js';
       import(`${PATH}/bright.js`);
       import { fetchData } from './src/js/calendar.js';
