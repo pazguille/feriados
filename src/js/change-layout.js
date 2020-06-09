@@ -44,7 +44,6 @@ function yearSelection(target) {
 
 function holidaySelection(target) {
   if (target.nodeName === 'BUTTON') {
-    eve.preventDefault();
     window.location.href = target.getAttribute('data-ical');
   }
 }
@@ -56,5 +55,6 @@ $$('[data-js="year-selection"]').addEventListener('click', (eve) => {
   yearSelection(eve.target.firstElementChild);
 });
 $$('[data-js="holiday-selection"]').addEventListener('click', (eve) => {
+  eve.preventDefault();
   holidaySelection(eve.target);
 });
