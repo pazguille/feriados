@@ -2,7 +2,8 @@
 
 > 🗓 Web App para ver los feriados nacionales en Argentina.
 
-- Web App: https://pazguille.github.io/feriados
+- Producction version: https://feriados.pazguille.me
+- Development version: https://feriados.pazguille.me/dev
 
 # Screenshots
 
