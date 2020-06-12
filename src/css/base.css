@@ -1,4 +1,16 @@
 ﻿/**
+ * Fonts
+ */
+
+@font-face {
+  font-family: 'Feriados';
+  src: url('../assets/visuelt-regular.woff2') format('woff2');
+  font-weight: lighter;
+  font-style: normal;
+  font-display: swap;
+}
+
+/**
  * Global
  */
 
@@ -9,11 +21,13 @@
 }
 
  body {
-  font: 100%/1.4em 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font: 100%/1.4em Feriados, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #343434;
   background-color: #fff;
   -webkit-font-smoothing: antialiased;
   margin: 0;
+  text-rendering: optimizeLegibility;
+  letter-spacing: .01em;
 }
 
 ul,
