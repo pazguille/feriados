@@ -25,11 +25,6 @@ function toggleLayout() {
     $yearSelection.removeAttribute('data-hidden')
     $arrow.classList.add('arrow-down');
   }
-
-  requestIdleCallback(() => {
-    $$(`#${activeLayoutView}-view`).setAttribute('hidden', 'hidden');
-    $$(`#${currentView}-view`).removeAttribute('hidden');
-  })
 }
 
 function yearSelection(target) {
@@ -51,7 +46,6 @@ function holidaySelection(eve) {
 
 $$('[data-js="layout-title"]').addEventListener('click', toggleLayout);
 $$('[data-js="layout-icon"]').addEventListener('click', toggleLayout);
-$$('[data-js="layout-toggle"]').addEventListener('click', toggleLayout);
 $$('[data-js="year-selection"]').addEventListener('click', (eve) => {
   yearSelection(eve.target.firstElementChild);
 });
