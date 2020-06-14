@@ -255,32 +255,28 @@ nav {
 .timeline-mask {
   position: relative;
   height: calc(100vh - 170px);
-  overflow: auto;
-  scroll-behavior: smooth;
+  display: flex;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  /* scroll-behavior: smooth; */
+  -webkit-overflow-scrolling: touch;
 }
 
 .timeline {
   list-style: none;
   padding: 20px;
+  overflow-y: auto;
+  min-width: calc(100vw - 40px);
+  position: relative;
+  scroll-snap-align: start;
 }
 
 .day {
   position: relative;
   margin-bottom: 20px;
 }
-
-
-/* .day:before {
-  content: '';
-  display: block;
-  width: 9px;
-  height: 9px;
-  position: absolute;
-  top: 20px;
-  left: -15px;
-  border-radius: 100%;
-  background: var(--bg-highlight-color);
-} */
 
 .day time {
   position: absolute;

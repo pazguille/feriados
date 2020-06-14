@@ -49,6 +49,6 @@ $$('[data-js="layout-icon"]').addEventListener('click', toggleLayout);
 $$('[data-js="year-selection"]').addEventListener('click', (eve) => {
   yearSelection(eve.target.firstElementChild);
 });
-$$('[data-js="holiday-selection"]').addEventListener('click', (eve) => {
+$$('[data-js="year-timeline"]').addEventListener('click', (eve) => {
   holidaySelection(eve);
 });
