@@ -2,7 +2,6 @@ import { $$ } from './html.js';
 import { moveMonthTo } from './calendar.js';
 
 const touchPassiveListener = { passive: true, capture: false };
-const movePassiveListener = { passive: false, capture: false };
 let startOffsetX = 0;
 let startOffsetY = 0;
 let currentOffsetX = 0;
@@ -19,8 +18,13 @@ function resetTouchFn(eve) {
 
 function onTouchEndFn() {
   if (!scrolling && currentOffsetX !== 0) {
-    const direction = currentOffsetX < 0? 'next' : 'prev';
-    moveMonthTo(direction);
+    requestIdleCallback(() => {
+      if (this.scrollLeft <= 0) {
+        moveMonthTo('prevYear');
+      } else if (this.scrollLeft >= (this.scrollWidth - this.clientWidth)) {
+        moveMonthTo('nextYear');
+      }
+    });
     return;
   }
   scrolling = false;
@@ -53,8 +57,7 @@ function onTouchMoveFn(eve) {
   }
 };
 
-const $main = $$('main');
-$main.addEventListener('touchstart', resetTouchFn, touchPassiveListener);
-$main.addEventListener('touchmove', onTouchMoveFn, movePassiveListener);
-$main.addEventListener('touchend', onTouchEndFn, touchPassiveListener);
-
+const $timeline = $$('.timeline-mask');
+$timeline.addEventListener('touchstart', resetTouchFn, touchPassiveListener);
+$timeline.addEventListener('touchmove', onTouchMoveFn, touchPassiveListener);
+$timeline.addEventListener('touchend', onTouchEndFn, touchPassiveListener);

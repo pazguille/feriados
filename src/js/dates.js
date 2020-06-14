@@ -1,8 +1,9 @@
 export const today = new Date();
 
-export function moveDate(date, moveTo) {
-  const to = moveTo === 'next' ? 1 : -1;
-  return new Date(date.getFullYear(), date.getMonth() + to, 1);
+export function moveDateYear(date, moveTo) {
+  const toYear = moveTo === 'nextYear' ? 1 : -1;
+  const toMonth = moveTo === 'nextYear' ? 0 : 11;
+  return new Date(date.getFullYear() + toYear, toMonth, 1);
 }
 
 export function isSameYear(dateA, dateB) {

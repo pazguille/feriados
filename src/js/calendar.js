@@ -1,17 +1,16 @@
-import { $$, html, render } from './html.js';
+import { $$ } from './html.js';
 import {
-  today, moveDate, isSameYear, getMonthLongName, leftFillNum, getDatetimeFormat,
+  today, moveDateYear, getMonthLongName, leftFillNum, getDatetimeFormat,
   getWeekdayShortName, isNextDay, isCurrentMonth, getNewYear,
 } from './dates.js';
 
-let currentDate = today;
-
+let loading = true;
+let currentDate = new Date();
 const holidaysData = {};
-const $timeline = $$('.timeline');
+let $title;
 
 const noDataYearTemplate = (year) => `<li class="nodata">No tengo información para el ${year} :(</li>`;
 const noHolidaysTemplate = () => '<li class="nodata">No hay feriados este mes :(</li>';
-
 const monthTemplate = ({ nextHoliday, datetime, day, weekday, feriado }) => (
   `<li class="day ${nextHoliday}">
     <time datetime="${datetime}">${weekday} <strong>${day}</strong></time>
@@ -27,7 +26,6 @@ const monthTemplate = ({ nextHoliday, datetime, day, weekday, feriado }) => (
     }
   </li>`
 );
-
 const yearTemplate = ({ currentMonth, datetime, monthName, month }) => (
   `<li class="month ${currentMonth}">
     <time datetime="${datetime}">${monthName}</time>
@@ -35,30 +33,52 @@ const yearTemplate = ({ currentMonth, datetime, monthName, month }) => (
   </li>`
 );
 
+function callback(entries) {
+  entries.forEach(entry => {
+    if (entry.intersectionRatio === 1 && !loading) {
+      const monthIndex = parseInt(entry.target.getAttribute('data-monthIndex'), 10);
+      currentDate.setMonth(monthIndex);
+      moveMonthTo(currentDate);
+    }
+  });
+};
+
+const $timeline = $$('[data-js="year-timeline"]');
+const observer = new IntersectionObserver(callback, {
+  root: $timeline,
+  rootMargin: '0px',
+  threshold: 1.0
+});
+
 export function moveMonthTo(moveTo) {
   let newDate = moveTo;
 
+  if (!$title) {
+    $title = $$('[data-js="layout-title"]');
+  };
+
   if (typeof moveTo === 'string') {
-    newDate = moveDate(currentDate, moveTo);
-  }
-
-  if (newDate.getFullYear() in holidaysData) {
-    renderMonth(newDate);
-    if (!isSameYear(newDate, currentDate)) {
-      requestIdleCallback(() => {
-        renderYear(newDate);
-      });
+    newDate = moveDateYear(currentDate, moveTo);
+    renderEmptyCalendar(newDate);
+    if (newDate.getFullYear() in holidaysData) {
+      renderCalendar(newDate);
+    } else {
+      fetchNewYear(newDate);
     }
-  } else {
-    fetchNewYear(newDate);
-  }
+    currentDate = newDate;
+    return;
 
-  currentDate = newDate;
+  } else {
+    const $month = $timeline.children[newDate.getMonth()];
+    $title.firstChild.data = `${$month.getAttribute('data-title')}`;
+    $month.scrollIntoView();
+    currentDate = newDate;
+  }
 }
 
 function fetchNewYear(date) {
   fetchData(date.getFullYear());
-  renderEmptyCalendar('async', date);
+  renderEmptyCalendar(date);
 }
 
 export function fetchData(year = today.getFullYear()) {
@@ -69,33 +89,42 @@ export function fetchData(year = today.getFullYear()) {
 }
 
 function bootCalendar(data) {
+  loading = true;
+
   if (data instanceof Error || data.error) {
     holidaysData[currentDate.getFullYear()] = null;
     renderCanlendar(currentDate);
     return;
   }
+
   holidaysData[currentDate.getFullYear()] = data;
   setTimeout(() => renderCalendar(currentDate), 500);
 }
 
-function renderEmptyCalendar(mode, newDate) {
-  const toggletMethod = mode === 'async' ? 'remove' : 'add';
-  $$('.calendar-title').firstChild.data = `${getMonthLongName(newDate)} ${newDate.getFullYear()}`;
-  $$('.loading').classList[toggletMethod]('hide');
+function renderEmptyCalendar(newDate) {
+  $$('.loading').classList.remove('hide');
   while ($timeline.lastChild) { $timeline.removeChild($timeline.lastChild); }
 }
 
 function renderMonth(newDate) {
-  renderEmptyCalendar('sync', newDate);
+  const title = `${getMonthLongName(newDate)} ${newDate.getFullYear()}`;
+  const listTemplate = (temp) => `
+    <ol class="timeline" data-js="holiday-selection" data-title="${title}" data-monthIndex="${newDate.getMonth()}">
+      ${temp}
+    </ol>`;
 
   if (holidaysData[newDate.getFullYear()] === null) {
-    return $timeline.insertAdjacentHTML('beforeend', noDataYearTemplate(newDate.getFullYear()));
+    return listTemplate(
+      noDataYearTemplate(newDate.getFullYear())
+    );
   }
 
   const monthHolidays = holidaysData[[newDate.getFullYear()]][newDate.getMonth()];
 
   if (Object.keys(monthHolidays).length === 0) {
-    return $timeline.insertAdjacentHTML('beforeend', noHolidaysTemplate());
+    return listTemplate(
+      noHolidaysTemplate()
+    );
   }
 
   let nextMarked = false;
@@ -113,7 +142,7 @@ function renderMonth(newDate) {
     });
   }).join('');
 
-  $timeline.insertAdjacentHTML('beforeend', template);
+  return listTemplate(template);
 }
 
 function renderYear(newDate) {
@@ -128,36 +157,45 @@ function renderYear(newDate) {
       datetime: getDatetimeFormat(yearDate),
       month,
     });
-    // return html`<li onClick="${() => console.log(monthName)}" class="month ${currentMonth}">
-    //           <time datetime="${datetime}">${monthName}</time>
-    //           <div ref="${monthName}">
-    //             ${Object.keys(month).map(item => '<span></span>').join('')}
-    //           </div>
-    //         </li>`;
-  // });
   }).join('');
   $year.insertAdjacentHTML('beforeend', template);
-
-  // var list = html`<ol class="year" data-hidden data-js="year-selection" onClick="${(eve) => console.log(eve)}">
-  //   ${template}
-  // </ol>`;
-  // console.log(list.collect());
-  // render(document.body, list);
 }
 
 function renderCalendar(date) {
-  renderMonth(date);
+  const a = new Date(date);
+  const year = new Date(date.getFullYear(), '0');
+  const yearHolidays = holidaysData[date.getFullYear()];
+
+  const $template = document.createElement('template');
+  yearHolidays.forEach((month, index) => {
+    requestIdleCallback(() => {
+      year.setMonth(index);
+      $template.insertAdjacentHTML('beforeend', renderMonth(year));
+    });
+  });
   requestIdleCallback(() => {
-    renderYear(date);
+    [].forEach.call($template.children, (child) => {
+      const node = child.cloneNode(true);
+      $timeline.appendChild(node);
+      observer.observe(node);
+    });
+  });
+
+  requestIdleCallback(() => {
+    loading = false;
+    $$('.loading').classList.add('hide');
+    moveMonthTo(a);
+  });
+
+  requestIdleCallback(() => {
+    renderYear(a);
   });
 }
-
-
 
 function createEvent(datetime, description) {
   return 'data:text/calendar;charset=utf8,' + encodeURIComponent(`BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//pazguille.github.com/feriados Local Maker
+PRODID:-//feriados.pazguille.me Local Maker
 CALSCALE:GREGORIAN
 BEGIN:VTIMEZONE
 TZID:America/Argentina/Buenos_Aires
@@ -173,7 +211,7 @@ END:VTIMEZONE
 BEGIN:VEVENT
 DTSTART;VALUE=DATE:${datetime}
 DTEND;VALUE=DATE:${datetime}
-SUMMARY:😍Feriado!!!😍
+SUMMARY:🗓 Feriado!!! 😍
 DESCRIPTION:${description}
 END:VEVENT
 END:VCALENDAR`
