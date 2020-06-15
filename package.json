@@ -1,6 +1,6 @@
 {
   "name": "feriados",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "🗓 Web App para ver los feriados nacionales en Argentina.",
   "scripts": {
     "build": "cp -rf ./dev/js ./src/"
