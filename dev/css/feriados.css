@@ -17,6 +17,13 @@
 }
 
 /**
+ * Disable scrollbar
+ */
+::-webkit-scrollbar{
+  display: none;
+}
+
+/**
  * light & dark mode enable
  */
  :root {
@@ -58,7 +65,6 @@
   --bg-box-highlight-color: rgba(3, 218, 197, 0.12) !important;
 }
 
-
 /**
  * Slideout
  */
@@ -80,7 +86,6 @@
 }
 
 .slideout-panel {
-  min-height: 100vh;
   background-color: var(--bg-color);
 }
 
@@ -125,6 +130,7 @@ body {
   width: 100%;
   min-height: 100vh;
   min-height: -webkit-fill-available;
+  overflow: hidden;
 }
 
 a,
@@ -135,7 +141,9 @@ a:visited {
 
 main {
   width: 100%;
-  min-height: 84vh;
+  position: relative;
+  overflow: hidden;
+  height: calc(100vh - 55px);
 }
 
 header {
@@ -254,7 +262,7 @@ nav {
 
 .timeline-mask {
   position: relative;
-  height: calc(100vh - 170px);
+  height: 90%;
   display: flex;
   overflow-x: scroll;
   overflow-y: hidden;
@@ -271,6 +279,8 @@ nav {
   min-width: calc(100vw - 40px);
   position: relative;
   scroll-snap-align: start;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 .day {
@@ -438,12 +448,6 @@ button:active,
   }
 }
 
-main {
-  position: relative;
-  overflow: hidden;
-  height: calc(100vh - 55px);
-}
-
 [data-view="year"] {
   overflow: hidden;
 }
@@ -489,7 +493,7 @@ main {
   position: absolute;
   border: none;
   background: none;
-  bottom: 50px;
+  bottom: 20px;
   left: 50%;
   z-index: 1;
   width: 60px;

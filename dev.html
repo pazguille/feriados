@@ -26,13 +26,13 @@
 
     <link rel="shortcut icon" href="src/assets/favicon.svg">
 
-    <link rel="stylesheet" href="src/css/base.css">
-    <link rel="stylesheet" href="src/css/feriados.css">
+    <link rel="stylesheet" href="dev/css/base.css">
+    <link rel="stylesheet" href="dev/css/feriados.css">
 
-    <link rel="modulepreload" href="./src/js/html.js">
-    <link rel="modulepreload" href="./src/js/bright.js">
-    <link rel="modulepreload" href="./src/js/dates.js">
-    <link rel="modulepreload" href="./src/js/calendar.js">
+    <link rel="modulepreload" href="./dev/js/html.js">
+    <link rel="modulepreload" href="./dev/js/bright.js">
+    <link rel="modulepreload" href="./dev/js/dates.js">
+    <link rel="modulepreload" href="./dev/js/calendar.js">
 
     <title>Feriados Nacionales de Argentina 2020</title>
     <meta name="Description" content="Feriados nacionales de la República Argentina. Consultá los días no laborables, feriados inamovibles y los feriados puente.">
@@ -84,9 +84,9 @@
           });
         }, 1);
       };
-      const PATH = './src/js';
+      const PATH = './dev/js';
       import(`${PATH}/bright.js`);
-      import { fetchData } from './src/js/calendar.js';
+      import { fetchData } from './dev/js/calendar.js';
       fetchData()
         .then(() => {
           requestIdleCallback(() => {
