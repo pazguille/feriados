@@ -52,8 +52,8 @@ $$('[data-js="year-selection"]').addEventListener('click', (eve) => {
 $$('[data-js="year-timeline"]').addEventListener('click', (eve) => {
   holidaySelection(eve);
 });
-$$('[data-js="move-month"]').addEventListener('click', (eve) => {
-  if (eve.target.nodeName === 'BUTTON') {
-    moveMonthTo(eve.target.getAttribute('data-js-move'));
-  }
-});
+// $$('[data-js="move-month"]').addEventListener('click', (eve) => {
+//   if (eve.target.nodeName === 'BUTTON') {
+//     moveMonthTo(eve.target.getAttribute('data-js-move'));
+//   }
+// });
