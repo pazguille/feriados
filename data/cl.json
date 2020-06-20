@@ -1,0 +1,113 @@
+[{
+	"1": {
+		"motivo": "Año Nuevo",
+		"tipo": "inamovible",
+		"info": "https://es.wikipedia.org/wiki/A%C3%B1o_Nuevo",
+		"id": "año-nuevo"
+	}
+}, {}, {}, {
+	"10": {
+		"motivo": "Viernes Santo Festividad Cristiana",
+		"tipo": "inamovible",
+		"info": "https://es.wikipedia.org/wiki/Viernes_Santo",
+		"id": "viernes-santo"
+	},
+	"11": {
+		"motivo": "Sábado Santo Festividad Cristiana",
+		"tipo": "inamovible",
+		"info": "https://es.wikipedia.org/wiki/S%C3%A1bado_Santo",
+		"id": "sabado-santo"
+	}
+}, {
+	"1": {
+		"motivo": "Día del Trabajador",
+		"tipo": "inamovible",
+		"info": "https://es.wikipedia.org/wiki/D%C3%ADa_Internacional_de_los_Trabajadores",
+		"id": "trabajador"
+	},
+	"21": {
+		"motivo": "Día de las Glorias Navales",
+		"tipo": "inamovible",
+		"info": "https://es.wikipedia.org/wiki/D%C3%ADa_de_las_Glorias_Navales",
+		"id": "glorias-navales"
+	}
+}, {
+	"29": {
+		"motivo": "San Pedro y San Pablo",
+		"tipo": "inamovible",
+		"info": "https://es.wikipedia.org/wiki/San_Pedro_y_San_Pablo",
+		"id": "pedro-pablo"
+	}
+}, {
+	"16": {
+		"motivo": "Día de la Virgen del Carmen",
+		"tipo": "inamovible",
+		"info": "https://es.wikipedia.org/wiki/Virgen_del_Carmen#Chile",
+		"id": "virgen-carmen"
+	}
+}, {
+	"15": {
+		"motivo": "Asunción de la Virgen",
+		"tipo": "inamovible",
+		"info": "https://es.wikipedia.org/wiki/Asunci%C3%B3n_de_Mar%C3%ADa",
+		"id": "asuncion-maria"
+	}
+}, {
+	"18": {
+		"motivo": "Independencia Nacional",
+		"tipo": "inamovible",
+		"info": "https://es.wikipedia.org/wiki/Fiestas_Patrias_en_Chile",
+		"id": "independencia"
+	},
+	"19": {
+		"motivo": "Día de las Glorias del Ejército",
+		"tipo": "inamovible",
+		"info": "https://es.wikipedia.org/wiki/D%C3%ADa_de_las_Glorias_del_Ej%C3%A9rcito_de_Chile",
+		"id": "glorias-ejercito"
+	}
+}, {
+	"12": {
+		"motivo": "Encuentro de Dos Mundos",
+		"tipo": "inamovible",
+		"info": "https://es.wikipedia.org/wiki/D%C3%ADa_de_la_Raza",
+		"id": "diversidad"
+	},
+	"25": {
+		"motivo": "Plebiscito Constitucional",
+		"tipo": "inamovible",
+		"info": "https://es.wikipedia.org/wiki/Elecciones_de_gobernadores_regionales_de_Chile_de_2021",
+		"id": "plebiscito-constitucional"
+	},
+	"31": {
+		"motivo": "Día de las Iglesias Evangélicas y Protestantes",
+		"tipo": "inamovible",
+		"info": "https://es.wikipedia.org/wiki/D%C3%ADa_Nacional_de_las_Iglesias_Evang%C3%A9licas_y_Protestantes",
+		"id": "dia-iglesias"
+	}
+}, {
+	"1": {
+		"motivo": "Día de Todos los Santos",
+		"tipo": "inamovible",
+		"info": "https://es.wikipedia.org/wiki/D%C3%ADa_de_Todos_los_Santos",
+		"id": "dia-santos"
+	},
+	"29": {
+		"motivo": "Elección Primaria de Alcaldes y Gobernadores Regionales",
+		"tipo": "Por Confirmar",
+		"info": "https://es.wikipedia.org/wiki/D%C3%ADa_de_Todos_los_Santos",
+		"id": "elecciones"
+	}
+}, {
+	"8": {
+		"motivo": "Inmaculada Concepción",
+		"tipo": "inamovible",
+		"info": "https://es.wikipedia.org/wiki/Inmaculada_Concepci%C3%B3n",
+		"id": "inmaculada-concepcion"
+	},
+	"25": {
+		"motivo": "Navidad",
+		"tipo": "inamovible",
+		"info": "https://es.wikipedia.org/wiki/Navidad",
+		"id": "navidad"
+	}
+}]

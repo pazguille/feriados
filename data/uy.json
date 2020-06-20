@@ -1,0 +1,104 @@
+[{
+	"1": {
+		"motivo": "Año Nuevo",
+		"tipo": "inamovible",
+		"info": "https://es.wikipedia.org/wiki/A%C3%B1o_Nuevo",
+		"id": "año-nuevo"
+	},
+  "6": {
+		"motivo": "Día de Reyes",
+		"tipo": "inamovible",
+		"info": "https://es.wikipedia.org/wiki/Epifan%C3%ADa",
+		"id": "dia-reyes"
+	}
+}, {
+	"24": {
+		"motivo": "Carnaval",
+		"tipo": "inamovible",
+		"info": "https://es.wikipedia.org/wiki/Carnaval",
+		"id": "carnaval"
+	},
+	"25": {
+		"motivo": "Carnaval",
+		"tipo": "inamovible",
+		"info": "https://es.wikipedia.org/wiki/Carnaval",
+		"id": "carnaval"
+	}
+}, {}, {
+	"9": {
+		"motivo": "Jueves Santo Festividad Cristiana",
+		"tipo": "inamovible",
+		"opcional": "religion",
+		"religion": "cristianismo",
+		"info": "https://es.wikipedia.org/wiki/Jueves_Santo",
+		"id": "jueves-santo"
+	},
+	"10": {
+		"motivo": "Viernes Santo Festividad Cristiana",
+		"tipo": "inamovible",
+		"info": "https://es.wikipedia.org/wiki/Viernes_Santo",
+		"id": "viernes-santo"
+	},
+	"19": {
+		"motivo": "Desembarco de los 33 orientales",
+		"tipo": "inamovible",
+		"opcional": "",
+		"info": "https://es.wikipedia.org/wiki/Treinta_y_Tres_Orientales",
+		"id": "desembarco"
+	}
+}, {
+	"1": {
+		"motivo": "Día del Trabajador",
+		"tipo": "inamovible",
+		"info": "https://es.wikipedia.org/wiki/D%C3%ADa_Internacional_de_los_Trabajadores",
+		"id": "trabajador"
+	},
+	"18": {
+		"motivo": "Batalla de las Piedras",
+		"tipo": "inamovible",
+		"info": "https://es.wikipedia.org/wiki/Batalla_de_Las_Piedras_(1811)",
+		"id": "batalla-piedras"
+	}
+}, {
+	"19": {
+		"motivo": "Natalicio de Artigas",
+		"tipo": "inamovible",
+		"info": "https://es.wikipedia.org/wiki/Jos%C3%A9_Gervasio_Artigas",
+		"id": "natalicio-artigas"
+	}
+}, {
+	"18": {
+		"motivo": "Día de la Constitución",
+		"tipo": "inamovible",
+		"info": "https://es.wikipedia.org/wiki/Constituci%C3%B3n_de_Uruguay_de_1830",
+		"id": "constitucion"
+	}
+}, {
+	"25": {
+		"motivo": "Día de la Independencia",
+		"tipo": "inamovible",
+		"info": "https://es.wikipedia.org/wiki/Declaratoria_de_la_independencia_(Uruguay)",
+		"id": "independencia"
+	}
+}, {}, {
+	"12": {
+		"motivo": "Día de la Diversidad Cultural",
+		"tipo": "inamovible",
+		"info": "https://es.wikipedia.org/wiki/D%C3%ADa_de_la_Raza",
+		"id": "diversidad"
+	}
+}, {
+	"2": {
+		"motivo": "Día de los Difuntos",
+		"tipo": "inamovible",
+		"info": "https://es.wikipedia.org/wiki/Todos_los_fieles_difuntos",
+		"id": "difuntos"
+	}
+}, {
+	"25": {
+		"motivo": "Navidad",
+		"tipo": "inamovible",
+		"info": "https://es.wikipedia.org/wiki/Navidad",
+		"id": "navidad"
+	}
+}]

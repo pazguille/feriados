@@ -1,9 +1,11 @@
 {
   "name": "feriados",
-  "version": "2.2.2",
-  "description": "🗓 Web App para ver los feriados nacionales en Argentina.",
+  "version": "3.0.0",
+  "description": "🗓 Web App para ver los feriados nacionales de Argentina, Chile y Uruguay.",
   "scripts": {
+    "start": "npx serve -p 3030",
     "build": "cp -rf ./dev/js ./src/"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {}
 }
