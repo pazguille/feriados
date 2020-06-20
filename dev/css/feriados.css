@@ -228,14 +228,6 @@ header {
   margin: -4px 0px 0px -4px;
 }
 
-nav {
-  height: 70px;
-  text-align: center;
-  position: sticky;
-  bottom: 0vh;
-  background: var(--bg-color);
-}
-
 .calendar-title {
   display: block;
   text-transform: capitalize;
@@ -255,8 +247,8 @@ nav {
   font-size: 30px;
 }
 
-.btn:active,
-.btn:focus {
+button:active,
+button:focus {
   outline: none;
 }
 
@@ -428,26 +420,6 @@ button:active,
   margin: 3px;
 }
 
-
-/* Large Screens */
-@media all and (min-width: 54em) {
-  body {
-    max-width: 50%;
-    margin: 0 auto;
-  }
-
-  .hamburger {
-    display: none;
-  }
-
-  nav {
-    position: absolute;
-    top: -8px;
-    right: 0px;
-    z-index: 1;
-  }
-}
-
 [data-view="year"] {
   overflow: hidden;
 }
@@ -516,6 +488,61 @@ button:active,
   margin-top: 15px;
 }
 
+.arrow-left {
+  border-width: 2px 2px 0 0;
+  width: 5px;
+  height: 5px;
+}
+
+.arrow-right {
+  border-width: 0 0 2px 2px;
+  width: 5px;
+  height: 5px;
+}
+
 .toggle.arrow-down .arrow {
   border-width: 3px 0 0 3px;
+}
+
+.month-navigation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2em;
+  z-index: 0;
+}
+
+.prev-month {
+  position: absolute;
+  left: 0;
+}
+
+.next-month {
+  position: absolute;
+  right: 0;
+}
+
+
+button {
+  border: none;
+  background: none;
+  width: 60px;
+  height: 60px;
+}
+
+/* Large Screens */
+@media all and (min-width: 54em) {
+  body {
+    max-width: 70%;
+    margin: 0 auto;
+  }
+
+  .hamburger {
+    display: none;
+  }
+
+  .timeline {
+    min-width: 95%;
+  }
 }

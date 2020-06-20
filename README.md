@@ -1,8 +1,11 @@
 # Feriados Web App
 
-> 🗓 Web App para ver los feriados nacionales en Argentina.
+> 🗓 Web App para ver los feriados nacionales de Argentina, Chile y Uruguay.
 
-- Producction version: https://feriados.pazguille.me
+- Producction versions
+  - Argentina: https://feriados.pazguille.me
+  - Chile: https://feriados.pazguille.me/cl
+  - Uruguay: https://feriados.pazguille.me/uy
 - Development version: https://feriados.pazguille.me/dev
 
 # Screenshots

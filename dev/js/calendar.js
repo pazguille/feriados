@@ -4,10 +4,24 @@ import {
   getWeekdayShortName, isNextDay, isCurrentMonth, getNewYear,
 } from './dates.js';
 
+const origin = window.location.origin;
+
+const endpoints = {
+  ar: (year) => `https://nolaborables.com.ar/api/v2/feriados/${year}?formato=mensual&incluir=opcional`,
+  uy: () => `${origin}/data/uy.json`,
+  cl: () => `${origin }/data/cl.json`,
+};
+
+function getCountry() {
+  const country = window.location.pathname.replace('/', '');
+  return country === 'dev' || !country ? 'ar' : country;
+}
+
 let loading = true;
 let currentDate = new Date();
+let country = getCountry();
+let endpoint = endpoints[country];
 const holidaysData = {};
-let $title;
 
 const noDataYearTemplate = (year) => `<li class="nodata">No tengo información para el ${year} :(</li>`;
 const noHolidaysTemplate = () => '<li class="nodata">No hay feriados este mes :(</li>';
@@ -33,7 +47,6 @@ const yearTemplate = ({ currentMonth, datetime, monthName, month }) => (
   </li>`
 );
 
-
 const $timeline = $$('[data-js="year-timeline"]');
 
 function callback(entries) {
@@ -54,6 +67,7 @@ const observer = new IntersectionObserver(callback, {
   threshold: 0.75
 });
 
+let $title;
 export function moveMonthTo(moveTo) {
   let newDate = moveTo;
 
@@ -63,7 +77,7 @@ export function moveMonthTo(moveTo) {
 
   if (typeof moveTo === 'string') {
     newDate = moveDateYear(currentDate, moveTo);
-    renderEmptyCalendar(newDate);
+    renderEmptyCalendar();
     if (newDate.getFullYear() in holidaysData) {
       renderCalendar(newDate);
     } else {
@@ -81,11 +95,11 @@ export function moveMonthTo(moveTo) {
 
 function fetchNewYear(date) {
   fetchData(date.getFullYear());
-  renderEmptyCalendar(date);
+  renderEmptyCalendar();
 }
 
 export function fetchData(year = today.getFullYear()) {
-  return fetch(`https://nolaborables.com.ar/api/v2/feriados/${year}?formato=mensual&incluir=opcional`)
+  return fetch(endpoint(year))
     .then(res => res.json())
     .then(data => bootCalendar(data))
     .catch(data => bootCalendar(data));
@@ -104,7 +118,7 @@ function bootCalendar(data) {
   setTimeout(() => renderCalendar(currentDate), 500);
 }
 
-function renderEmptyCalendar(newDate) {
+function renderEmptyCalendar() {
   $$('.loading').classList.remove('hide');
   while ($timeline.lastChild) { $timeline.removeChild($timeline.lastChild); }
 }
@@ -200,17 +214,6 @@ function createEvent(datetime, description) {
 VERSION:2.0
 PRODID:-//feriados.pazguille.me Local Maker
 CALSCALE:GREGORIAN
-BEGIN:VTIMEZONE
-TZID:America/Argentina/Buenos_Aires
-TZURL:http://tzurl.org/zoneinfo-outlook/America/Argentina/Buenos_Aires
-X-LIC-LOCATION:America/Argentina/Buenos_Aires
-BEGIN:STANDARD
-TZOFFSETFROM:-0300
-TZOFFSETTO:-0300
-TZNAME:-03
-DTSTART:19700101T000000
-END:STANDARD
-END:VTIMEZONE
 BEGIN:VEVENT
 DTSTART;VALUE=DATE:${datetime}
 DTEND;VALUE=DATE:${datetime}
