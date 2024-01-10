@@ -7,7 +7,7 @@ import {
 const origin = window.location.origin;
 
 const endpoints = {
-  ar: (year) => `https://nolaborables.com.ar/api/v2/feriados/${year}?formato=mensual&incluir=opcional`,
+  ar: (year) => `https://nolaborables.deno.dev/api/feriados/${year}?formato=mensual&incluir=opcional`,
   uy: () => `${origin}/data/uy.json`,
   cl: () => `${origin }/data/cl.json`,
 };
